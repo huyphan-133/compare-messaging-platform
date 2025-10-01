@@ -1,0 +1,166 @@
+@startuml modules
+title NestJS's module definition
+
+package "Layer 1" as l1 {
+    class AppModule #green
+    note top
+    mặc định khai báo
+    end note
+}
+
+package "Layer 2" as l2 {
+    class MainModule #orange
+    note top
+    code logic nghiệp vụ
+    end note
+
+    class CommonModule #green
+    note top
+    - thư viện dùng chung
+    - rest-template, jdbc-template, base-crud, convert,...
+    end note
+
+    class AdminModule #green
+    note bottom
+    user, role, category, requestmap...
+    end note
+}
+
+package "Layer 3" as l3 {
+    class IntegrationHistModule #green
+    note bottom
+    ghi log call api bằng resttemplate
+    end note
+
+    class LDAPModule #green
+    note bottom
+    tích hợp ldap
+    end note
+
+    class LoggerModule #green
+    note bottom
+    ghi log ra file, console, elk
+    end note
+
+    class OpenAPIModule #green
+    note bottom
+    xác thực bằng token của OpenAPI
+    end note
+
+    class SSOModule #green
+    note bottom
+    xác thực sso tích hợp keycloak
+    end note
+
+    class WSModule #green
+    note bottom
+    tích hợp websocket
+    end note
+
+    class RateLimitModule #green
+    note bottom
+    Thiết lập Rate Limit cho API
+    end note
+
+    class CacheRedisModule #green
+    note bottom
+    Lưu Cache trên Redis
+    end note
+
+    class EmailModule #green
+    note bottom
+    gửi email
+    end note
+
+    class FacebookModule #orange
+    note bottom
+    Đăng nhập bằng tk Facebook
+    end note
+
+    class GoogleModule #orange
+    note bottom
+    Đăng nhập bằng tk Google
+    end note
+
+    class KBSVOTPModule #green
+    note bottom
+    Xác thực API bằng OTP của KBSV
+    end note
+
+    class S3Module #green
+    note bottom
+    Làm việc với S3 server
+    end note
+
+    class ScriptModule #green
+    note bottom
+    Load JS Script từ DB để thực thi Runtime
+    end note
+}
+
+package "Layer 4" as l4 {
+    class WSRedisModule #green
+    note bottom
+    redis adapter cho websocket
+    end note
+}
+
+l1 -[hidden]-> l2
+
+' MainModule
+AppModule *-- MainModule
+
+' CommonModule
+AppModule *-- CommonModule
+
+' AdminModule
+AppModule *-- AdminModule
+CommonModule <|-- AdminModule
+
+' IntegrationHistModule
+CommonModule <|-- IntegrationHistModule
+
+' LDAPModule
+AdminModule <|-- LDAPModule
+
+' LoggerModule
+AppModule *-- LoggerModule
+
+' OpenAPIModule
+CommonModule <|-- OpenAPIModule
+
+' SSOModule
+CommonModule <|-- SSOModule
+
+' WSModule
+CommonModule <|-- WSModule
+
+' RedisWSModule
+WSModule <|-- WSRedisModule
+
+' EmailModule
+CommonModule <|-- EmailModule
+
+' RateLimitModule
+CommonModule <|-- RateLimitModule
+
+' CacheRedisModule
+CommonModule <|-- CacheRedisModule
+
+' GoogleModule
+CommonModule <|-- GoogleModule
+
+' FacebookModule
+CommonModule <|-- FacebookModule
+
+'KBSVOTPModule
+CommonModule <|-- KBSVOTPModule
+
+' S3Module
+AppModule <|-- S3Module
+CommonModule <|-- S3Module
+
+'ScriptModule
+CommonModule <|-- ScriptModule
+
+@enduml

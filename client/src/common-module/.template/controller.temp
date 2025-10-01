@@ -1,0 +1,10 @@
+import { Controller } from '@nestjs/common';
+import { @@entity@@Service } from '../../service/@@entityKebabCase@@/@@entityKebabCase@@.service';
+import { BaseEntityController } from 'src/common-module/controller/base-entity/base-entity.controller';
+
+@Controller('/api/v1/@@entityKebabCase@@')
+export class @@entity@@Controller extends BaseEntityController {
+    constructor(public entityService: @@entity@@Service) {
+        super(entityService)
+    }
+}

@@ -1,0 +1,12 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { @@entity@@ } from '../../entity/@@entityKebabCase@@/@@entityKebabCase@@.entity';
+import { BaseEntityService } from 'src/common-module/service/base-entity/base-entity.service';
+
+@Injectable()
+export class @@entity@@Service extends BaseEntityService {
+    constructor(@InjectRepository(@@entity@@) public entityRepository: Repository<@@entity@@>) {
+        super(entityRepository);
+    }
+}

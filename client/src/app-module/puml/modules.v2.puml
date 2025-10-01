@@ -1,0 +1,23 @@
+@startwbs
+
+*[#LightGreen] "App" as app
+**[#LightGreen] "Common" as common
+***[#LightGreen] "Integration Hist" as intergation_hist
+***[#LightGreen] "OpenAPI" as open_api
+***[#LightGreen] "Websocket" as ws
+****[#LightGreen] "Websocket Redis Adapter" as ws_redis
+***[#LightGreen] "Email" as email
+***[#LightGreen] "Rate Limit" as rate_limit
+***[#LightGreen] "Redis Cache" as cache_redis
+***[#LightGreen] "SSO" as sso
+***[#Orange] "Google SSO" as gg_sso
+***[#Orange] "Facebook SSO" as fb_sso
+***[#LightGreen] "KBSV OTP" as kbsv_otp
+***[#LightGreen] "S3" as s3
+***[#LightGreen] "Script" as script
+**[#LightGreen] "Admin" as admin
+***[#LightGreen] "LDAP" as ldap
+**[#LightGreen] "Logger" as logger
+**[#Gray] "Main" as main
+
+@endwbs

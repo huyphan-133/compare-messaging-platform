@@ -1,0 +1,6 @@
+import { Entity, Column, BeforeInsert, BeforeUpdate, BeforeRemove } from 'typeorm';
+import { BaseEntity } from 'src/common-module/entity/base/base.entity';
+
+@Entity({ name: '@@tableName@@' })
+export class @@schema@@ extends BaseEntity {
+}
