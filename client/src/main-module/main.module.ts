@@ -14,6 +14,7 @@ import { ConfigUtils } from 'src/app-module/utils/config.utils';
 import { KafkaModule } from 'src/nestjs-kafka-module';
 import { Consumer } from './consumer';
 import { RestTemplate } from 'src/common-module/utils/rest-template/rest-template.utils';
+import { RedisService } from './service/redis.service';
 
 @Module({
     imports: [
@@ -53,7 +54,8 @@ import { RestTemplate } from 'src/common-module/utils/rest-template/rest-templat
     providers: [
         CustomLoggerService,
         RestTemplate,
-        Consumer
+        Consumer,
+        RedisService
     ],
     exports: []
 })
