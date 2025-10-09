@@ -12,9 +12,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ConfigUtils } from 'src/app-module/utils/config.utils';
 import { KafkaModule } from 'src/nestjs-kafka-module';
-import { Consumer } from './consumer';
+import { KafkaConsumer } from './consumer/kafka-consumer';
 import { RestTemplate } from 'src/common-module/utils/rest-template/rest-template.utils';
-import { RedisService } from './service/redis.service';
+import { RedisPubsubService } from './service/redis-pubsub.service';
+import { RedisStreamService } from './service/redis-stream.service';
 
 @Module({
     imports: [
@@ -54,8 +55,9 @@ import { RedisService } from './service/redis.service';
     providers: [
         CustomLoggerService,
         RestTemplate,
-        Consumer,
-        RedisService
+        KafkaConsumer,
+        RedisPubsubService,
+        RedisStreamService
     ],
     exports: []
 })

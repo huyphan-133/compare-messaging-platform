@@ -3,7 +3,7 @@ import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import Redis, { RedisOptions } from 'ioredis';
 
 @Injectable()
-export class RedisService implements OnModuleInit, OnModuleDestroy {
+export class RedisPubsubService implements OnModuleInit, OnModuleDestroy {
     private subscriber: Redis;
 
     private readonly REDIS_HOST = process.env['redis.host'];
