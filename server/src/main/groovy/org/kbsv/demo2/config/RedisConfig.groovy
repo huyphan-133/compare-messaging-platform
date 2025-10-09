@@ -4,10 +4,16 @@ import org.kbsv.demo2.model.Message
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory
+import org.springframework.data.redis.connection.stream.MapRecord
 import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer
+import org.springframework.data.redis.stream.StreamMessageListenerContainer
+
+import java.time.Duration
 
 @Configuration
 class RedisConfig {
@@ -31,4 +37,8 @@ class RedisConfig {
         return template
     }
 
+    @Bean
+    StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
+        new StringRedisTemplate(factory)
+    }
 }

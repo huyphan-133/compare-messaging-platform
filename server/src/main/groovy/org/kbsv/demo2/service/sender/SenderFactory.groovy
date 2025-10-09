@@ -11,12 +11,17 @@ class SenderFactory {
     @Autowired
     private RedisPubSubSender redisPubSubSender
 
+    @Autowired
+    private RedisStreamSender redisStreamSender
+
     ISender getSender(String type) {
         switch (type) {
             case 'kafka':
                 return kafkaSender
             case 'redis-pubsub':
                 return redisPubSubSender
+            case 'redis-stream':
+                return redisStreamSender
             default:
                 throw new IllegalArgumentException("Unsupported sender type: $type")
         }
