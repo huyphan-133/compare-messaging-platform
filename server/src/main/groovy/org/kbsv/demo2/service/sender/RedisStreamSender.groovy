@@ -1,6 +1,7 @@
 package org.kbsv.demo2.service.sender
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.kbsv.demo2.model.Message
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.connection.stream.StreamRecords
 import org.springframework.data.redis.core.StringRedisTemplate
@@ -17,7 +18,7 @@ class RedisStreamSender implements ISender {
     private ObjectMapper objectMapper
 
     @Override
-    def send(Object message) {
+    def send(Message message) {
         def json = objectMapper.writeValueAsString(message)
         def record = StreamRecords.newRecord()
                 .ofMap([payload: json])

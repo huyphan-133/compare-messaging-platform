@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service
 
 @Slf4j
 @Service
-class KafkaSender implements ISender {
+class KafkaOnlyOneSender implements ISender {
     @Autowired
     private KafkaTemplate<String, Message> kafkaTemplate
 //
     private static final String KAFKA_TOPIC = "compare-platform"
 
     @Override
-    def send(Object message) {
+    def send(Message message) {
         try {
             kafkaTemplate.send(KAFKA_TOPIC, message as Message)
         } catch (Exception e) {

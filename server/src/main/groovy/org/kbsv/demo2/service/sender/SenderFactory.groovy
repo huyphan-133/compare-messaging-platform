@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 @Component
 class SenderFactory {
     @Autowired
-    private KafkaSender kafkaSender
+    private KafkaNPartitionsSender kafkaNPartitionsSender
 
     @Autowired
     private RedisPubSubSender redisPubSubSender
@@ -14,10 +14,20 @@ class SenderFactory {
     @Autowired
     private RedisStreamSender redisStreamSender
 
+    @Autowired
+    private KafkaNTopicsSender kafkaNTopicsSender
+
+    @Autowired
+    private KafkaOnlyOneSender kafkaOnlyOneSender
+
     ISender getSender(String type) {
         switch (type) {
-            case 'kafka':
-                return kafkaSender
+            case 'kafka-only-one':
+                return kafkaOnlyOneSender
+            case 'kafka-n-partitions':
+                return kafkaNPartitionsSender
+            case 'kafka-n-topics':
+                return kafkaNTopicsSender
             case 'redis-pubsub':
                 return redisPubSubSender
             case 'redis-stream':

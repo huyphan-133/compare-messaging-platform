@@ -6,7 +6,6 @@ import org.kbsv.demo2.model.Message
 import org.kbsv.demo2.service.sender.ISender
 import org.kbsv.demo2.service.sender.SenderFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 
@@ -23,20 +22,21 @@ class MessageProducerService {
     private SenderFactory senderFactory
 
     @Async
-    void send(int throughput, int rounds, String type) {
+    void send(int throughput, int rounds, String type, int numberOfPartitions) {
         ISender sender = senderFactory.getSender(type)
 
         for (int i = 0; i < rounds; i++) {
             int round = i + 1;
             scheduler.schedule(() -> {
                 def messages = genMessages(throughput)
-                messages.each { message ->
+                messages.eachWithIndex { message, messageIndex ->
                     message.id = round + "-" + message.id
                     message.content = "Round $round: " + message.content
-                    sender.send( message)
+                    message.partitionNumber = numberOfPartitions == 1 ? 1 : messageIndex % numberOfPartitions
+                    sender.send(message)
                 }
                 log.info("Round $round: Sent $throughput messages")
-            }, i , TimeUnit.SECONDS)
+            }, i, TimeUnit.SECONDS)
         }
 
     }

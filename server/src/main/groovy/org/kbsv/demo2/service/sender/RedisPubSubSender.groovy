@@ -18,7 +18,7 @@ class RedisPubSubSender implements ISender {
     private final objectMapper = new ObjectMapper()
 
     @Override
-    def send(Object message) {
+    def send(Message message) {
         try {
             String sMessage = objectMapper.writeValueAsString(message)
             redisTemplate.convertAndSend(CHANNEL, sMessage)

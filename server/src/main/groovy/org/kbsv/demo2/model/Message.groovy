@@ -10,4 +10,5 @@ class Message {
     String content
     long timestamp = Instant.now().toEpochMilli()
     String source = "producer"
+    int partitionNumber
 }
