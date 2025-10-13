@@ -16,6 +16,8 @@ import { KafkaConsumer } from './consumer/kafka-consumer';
 import { RestTemplate } from 'src/common-module/utils/rest-template/rest-template.utils';
 import { RedisPubsubService } from './service/redis-pubsub.service';
 import { RedisStreamService } from './service/redis-stream.service';
+import { KafkaNPartitionsConsumer } from './consumer/kafka-n-partitions-consumer';
+import { KafkaNTopicsConsumer } from './consumer/kafka-n-topics-consumer';
 
 @Module({
     imports: [
@@ -57,7 +59,9 @@ import { RedisStreamService } from './service/redis-stream.service';
         RestTemplate,
         KafkaConsumer,
         RedisPubsubService,
-        RedisStreamService
+        RedisStreamService,
+        KafkaNPartitionsConsumer,
+        KafkaNTopicsConsumer
     ],
     exports: []
 })
