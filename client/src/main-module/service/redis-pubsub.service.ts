@@ -8,12 +8,17 @@ export class RedisPubsubService implements OnModuleInit, OnModuleDestroy {
 
     private readonly REDIS_HOST = process.env['redis.host'];
     private readonly REDIS_PORT = parseInt(process.env['redis.port']);
+    private readonly REDIS_USERNAME = process.env['redis.username'];
+    private readonly REDIS_PASSWORD = process.env['redis.password'];
 
 
     onModuleInit() {
         const options: RedisOptions = {
             host: this.REDIS_HOST,
             port: this.REDIS_PORT,
+            username: this.REDIS_USERNAME,
+            password: this.REDIS_PASSWORD,
+            
         };
         this.subscriber = new Redis(options);
 
