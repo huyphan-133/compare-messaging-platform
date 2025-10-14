@@ -23,9 +23,17 @@ class RedisConfig {
     @Value('${spring.redis.port:6379}')
     private int redisPort
 
+    @Value('${spring.redis.password:}')
+    private String redisPassword
+
     @Bean
     LettuceConnectionFactory redisConnectionFactory() {
-        new LettuceConnectionFactory(redisHost, redisPort)
+        def factory = new LettuceConnectionFactory(redisHost, redisPort)
+        if (redisPassword) {
+            factory.password = redisPassword
+        }
+        factory.afterPropertiesSet()
+        return factory
     }
 
     @Bean

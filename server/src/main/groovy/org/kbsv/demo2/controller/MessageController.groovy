@@ -18,6 +18,6 @@ class MessageController {
     @PostMapping("/send")
     String send(@RequestBody MessageRequest request) {
         messageProducerService.send(request.throughput, request.rounds, request.type, request.numberOfPartitions)
-        return "Started sending ${request.throughput} messages to Kafka in ${request.rounds} rounds with seconds delay to ${request.type}"
+        return "Started sending ${request.throughput} messages to ${request.type} in ${request.rounds} rounds with seconds delay to ${request.type}"
     }
 }
