@@ -66,6 +66,7 @@ export class KafkaNPartitionsConsumer implements OnModuleInit {
             let data: any = JSON.parse(payload);
             const end = new Date().getTime();
             console.log(`
+                kafka-multi-topic
                 ID: ${data.id},
                 Time from receive: ${end - start} ms,
                 producer to kafka: ${timestamp - data.timestamp} ms,

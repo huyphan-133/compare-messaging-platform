@@ -37,7 +37,7 @@ export class RedisPubsubService implements OnModuleInit, OnModuleDestroy {
             let data: any = JSON.parse(message);
             const end = new Date().getTime();
             console.log(`
-                Time from receive: ${end - start} ms,
+                Redis Pub/Sub Time from receive: ${end - start} ms,
                 producer to consumer: ${start - data.timestamp} ms,
                 total time: ${end - data.timestamp} ms
                 `);

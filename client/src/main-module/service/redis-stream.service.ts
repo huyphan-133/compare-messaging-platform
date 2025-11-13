@@ -64,7 +64,7 @@ export class RedisStreamService implements OnModuleInit, OnModuleDestroy {
                         const message = this.parseMessage(fields);
                         const end = new Date().getTime();
                         console.log(`
-                            Stream message ID: ${id}
+                            Redis-stream message ID: ${id}
                             Time from receive: ${end - start} ms,
                             Producer to consumer: ${start - message.timestamp} ms,
                             Total time: ${end - message.timestamp} ms
