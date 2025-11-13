@@ -14,6 +14,8 @@ export class RedisStreamService implements OnModuleInit, OnModuleDestroy {
     private readonly REDIS_PORT = parseInt(process.env['redis.port']);
     private readonly REDIS_USERNAME = process.env['redis.username'];
     private readonly REDIS_PASSWORD = process.env['redis.password'];
+    private readonly BLOCK_TIMEOUT = parseInt(process.env['redis-stream.block-timeout']) || 0;
+    private readonly READ_COUNT = parseInt(process.env['redis-stream.read-count']) || 500;
 
     async onModuleInit() {
         const options: RedisOptions = {
@@ -47,9 +49,9 @@ export class RedisStreamService implements OnModuleInit, OnModuleDestroy {
                     this.consumerGroup,
                     this.consumerName,
                     'COUNT',
-                    10,
+                    this.BLOCK_TIMEOUT,
                     'BLOCK',
-                    500,
+                    this.READ_COUNT,
                     'STREAMS',
                     this.streamKey,
                     '>'
@@ -79,7 +81,7 @@ export class RedisStreamService implements OnModuleInit, OnModuleDestroy {
     }
 
     private parseMessage(fields: string[]) {
-       return JSON.parse(fields[1]);
+        return JSON.parse(fields[1]);
     }
 
     async onModuleDestroy() {
